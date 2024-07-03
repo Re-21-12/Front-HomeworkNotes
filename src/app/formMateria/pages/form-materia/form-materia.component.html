@@ -1,0 +1,38 @@
+<div class="container" style="margin-top: 4rem;">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Agregar Nueva Materia</h5>
+          <form (submit)="onSubmit()" #form="ngForm">
+            <!-- Nombre de la Materia -->
+            <div class="form-group">
+              <label for="nombreMateria">Nombre de la Materia</label>
+              <input
+                name="nombreMateria"
+                id="nombreMateria"
+                class="form-control"
+                type="text"
+                placeholder="Estadistica II"
+                [(ngModel)]="materia.nombreMateria"
+                required
+                #nombreMateria="ngModel"
+              />
+              <div *ngIf="nombreMateria.invalid && (nombreMateria.dirty || nombreMateria.touched)" class="alert alert-danger mt-2">
+                Debe escribir un titulo
+              </div>
+            </div>
+            <!-- Botón de enviar -->
+            <button
+              type="submit"
+              class="btn btn-primary btn-block mt-4"
+              [disabled]="form.invalid"
+            >
+              Agregar Nueva Materia
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

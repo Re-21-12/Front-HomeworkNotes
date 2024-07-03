@@ -1,0 +1,116 @@
+  <form
+    (submit)="filtrarActividades()"
+    #form="ngForm"
+    class="input-group mt-4 gap-3 justify-content-center"
+  >
+    <!-- Buscar por nombre -->
+    <div class="col-auto">
+      <input
+        type="text"
+        name="nombre"
+        [(ngModel)]="nombre"
+        (input)="filtrarNombre()"
+        class="form-control"
+        placeholder="Buscar por nombre"
+      />
+    </div>
+
+    <!-- Filtrar por materia -->
+    <div class="col-auto">
+      <select name="materia" [(ngModel)]="materia" class="form-select">
+        <option *ngFor="let materia of Materias" [value]="materia">
+          {{ materia }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Filtrar por tipo -->
+    <div class="col-auto">
+      <select name="tipo" [(ngModel)]="tipo" class="form-select">
+        <option value="Parcial I">Parcial I</option>
+        <option value="Parcial II">Parcial II</option>
+        <option value="Final">Final</option>
+        <option value="Actividad">Actividad</option>
+        <option value="Proyecto">Proyecto</option>
+      </select>
+    </div>
+
+    <!-- Filtrar por estado -->
+    <div class="col-auto">
+      <select name="estado" [(ngModel)]="estado" class="form-select">
+        <option value="realizada">Realizada</option>
+        <option value="pendiente">Pendiente</option>
+      </select>
+    </div>
+
+    <!-- Botón de filtrar -->
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-dark">Filtrar</button>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-outline-dark" (click)="limpiar()">
+        Limpiar
+      </button>
+    </div>
+  </form>
+
+  <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+  <hr />
+  <h4 class="text-center">Actividades</h4>
+  <div class="container shadow" style="max-height: 600px; overflow-y: auto">
+    <div class="row row-cols-2 row-cols-md-4" style="margin-top: 2rem">
+      <div *ngFor="let item of Actividades" class="col mt-2">
+        <div class="card rounded text-dark">
+          <div class="card-header">
+            <h5 class="card-title text-truncate">{{ item.nombre }}</h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Tipo</li>
+                  <li class="list-group-item">Estado</li>
+                  <li class="list-group-item">Materia</li>
+                  <li class="list-group-item">Nota</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{ item.tipo }}</li>
+                  <li class="list-group-item">{{ item.estado }}</li>
+                  <li class="list-group-item text-truncate">
+                    {{ item.materia }}
+                  </li>
+                  <li class="list-group-item">{{ item.nota }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <p class="text-center text-muted">Fecha Entrega</p>
+            <blockquote class="blockquote-footer">
+              {{ item.fechaEntrega | date : "yyyy/MM/dd hh:mm" }}
+            </blockquote>
+          </div>
+          <button
+            [routerLink]="['/formularioActividad/', item.id]"
+            class="btn btn-outline-dark"
+          >
+            Editar
+            <i class="bi bi-pencil-square"></i>
+          </button>
+          <button class="btn btn-outline-dark" (click)="onDelete(item.id)">
+            Eliminar
+            <i class="bi bi-trash2"></i>
+          </button>
+          <button
+            [routerLink]="['/detallarActividad/', item.id]"
+            class="btn btn-outline-dark"
+          >
+            Detallar
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,4 @@
+.card:hover {
+    box-shadow: 0 10px 8px rgba(81, 81, 81, 0.3); /* Genera una sombra al pasar el mouse */
+  }
+  
